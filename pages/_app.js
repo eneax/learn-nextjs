@@ -1,10 +1,15 @@
+import * as React from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+
 import { AuthProvider } from '../lib/auth';
-import '../styles/globals.css';
+import customTheme from '../styles/theme';
 
 const App = ({ Component, pageProps }) => (
-  <AuthProvider>
-    <Component {...pageProps} />
-  </AuthProvider>
+  <ChakraProvider resetCSS theme={customTheme}>
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
+  </ChakraProvider>
 );
 
 export default App;
