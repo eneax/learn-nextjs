@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "vercel env pull && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -13,7 +13,8 @@
     "firebase": "^8.2.3",
     "next": "^10.0.5",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "vercel": "^21.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
