@@ -15,13 +15,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
+import { createSite } from '@/lib/db';
+
 const AddSiteModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const { handleSubmit, register } = useForm();
 
   const onCreateSite = values => {
-    console.log(values);
+    createSite(values);
     onClose();
   };
 
