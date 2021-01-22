@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAuth } from '@/lib/auth';
-import EmptyState from '@/components/EmptyState';
+import EmptyState from '@/components/emptyState';
 
 const Dashboard = () => {
   const auth = useAuth();
