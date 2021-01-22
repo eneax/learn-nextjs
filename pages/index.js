@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { Heading, Text, Code, Button } from '@chakra-ui/react';
+import { Button, Icon, Flex } from '@chakra-ui/react';
+import { MdGroupWork } from 'react-icons/md';
 
 import { useAuth } from '@/lib/auth';
 
@@ -7,26 +8,27 @@ const Home = () => {
   const auth = useAuth();
 
   return (
-    <div>
+    <Flex
+      as="main"
+      direction="column"
+      align="center"
+      justify="center"
+      h="100vh"
+    >
       <Head>
         <title>Agora</title>
       </Head>
 
-      <main>
-        <Heading>Agora</Heading>
+      <Icon as={MdGroupWork} name="logo" color="black" w={10} h={10} />
 
-        <Text>
-          Current user: <Code>{auth.user ? auth.user.email : 'None'}</Code>
-        </Text>
-        {auth.user ? (
-          <Button onClick={() => auth.signout()}>Sign Out</Button>
-        ) : (
-          <Button onClick={() => auth.signinWithGitHub()}>
-            Sign In with GitHub
-          </Button>
-        )}
-      </main>
-    </div>
+      {auth.user ? (
+        <Button onClick={() => auth.signout()}>Sign Out</Button>
+      ) : (
+        <Button size="sm" mt={4} onClick={() => auth.signinWithGitHub()}>
+          Sign in with GitHub
+        </Button>
+      )}
+    </Flex>
   );
 };
 
