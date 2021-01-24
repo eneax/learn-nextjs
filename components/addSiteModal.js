@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 import {
   Modal,
   ModalOverlay,
@@ -19,7 +20,7 @@ import {
 import { createSite } from '@/lib/db';
 import { useAuth } from '@/lib/auth';
 
-const AddSiteModal = () => {
+const AddSiteModal = ({ children }) => {
   const initialRef = React.useRef();
   const toast = useToast();
   const auth = useAuth();
@@ -27,26 +28,43 @@ const AddSiteModal = () => {
   const { handleSubmit, register } = useForm();
 
   const onCreateSite = ({ name, url }) => {
-    createSite({
+    const newSite = {
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
       name,
       url,
-    });
+    };
+
+    createSite(newSite);
     toast({
       title: 'Success!',
       description: "We've added your site.",
       status: 'success',
-      duration: 5000,
+      duration: 3000,
       isClosable: true,
     });
+    mutate(
+      '/api/sites',
+      async data => ({ sites: [...data.sites, newSite] }),
+      false // use 'false' to mutate without revalidation
+    );
     onClose();
   };
 
   return (
     <>
-      <Button fontWeight="medium" maxW="200px" onClick={onOpen}>
-        Add Your First Site
+      <Button
+        onClick={onOpen}
+        backgroundColor="gray.900"
+        color="white"
+        fontWeight="medium"
+        _hover={{ bg: 'gray.700' }}
+        _active={{
+          bg: 'gray.800',
+          transform: 'scale(0.95)',
+        }}
+      >
+        {children}
       </Button>
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>

@@ -14,6 +14,7 @@ import {
 import { MdGroupWork } from 'react-icons/md';
 
 import { useAuth } from '@/lib/auth';
+import AddSiteModal from './addSiteModal';
 
 const DashboardContainer = ({ children }) => {
   const { user, signout } = useAuth();
@@ -65,10 +66,9 @@ const DashboardContainer = ({ children }) => {
         </Breadcrumb>
         <Flex justifyContent="space-between">
           <Heading mb={8}>My Sites</Heading>
-          <Button>
-            + Add Site
-          </Button>
+          <AddSiteModal>+ Add Site</AddSiteModal>
         </Flex>
+
         {/* Dashboard Content */}
         {children}
       </Flex>
