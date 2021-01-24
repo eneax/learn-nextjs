@@ -6,6 +6,7 @@ import fetcher from '@/utils/fetcher';
 
 import DashboardContainer from '@/components/dashboardContainer';
 import SiteTableSkeleton from '@/components/siteTableSkeleton';
+import SiteTable from '@/components/siteTable';
 import EmptyState from '@/components/emptyState';
 
 const Dashboard = () => {
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <DashboardContainer>
-      <EmptyState />
+      {data.sites ? <SiteTable sites={data.sites} /> : <EmptyState />}
     </DashboardContainer>
   );
 };

@@ -26,11 +26,11 @@ const AddSiteModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register } = useForm();
 
-  const onCreateSite = ({ site, url }) => {
+  const onCreateSite = ({ name, url }) => {
     createSite({
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
-      site,
+      name,
       url,
     });
     toast({
@@ -60,7 +60,7 @@ const AddSiteModal = () => {
               <Input
                 ref={initialRef}
                 placeholder="My site"
-                name="site"
+                name="name"
                 ref={register({
                   required: 'Required',
                 })}
