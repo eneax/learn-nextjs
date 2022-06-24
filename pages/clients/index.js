@@ -23,3 +23,15 @@ const ClientsPage = () => {
 };
 
 export default ClientsPage;
+
+/*
+! Alternative Link with URL object
+
+<Link href={{
+  pathname: '/clients',
+  query: {id: clients.id}
+}}>
+  {name}
+</Link>
+
+*/
