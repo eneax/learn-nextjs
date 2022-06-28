@@ -3,6 +3,7 @@ import Link from "next/link";
 const HomePage = () => {
   return (
     <div>
+      <h1>Home Page</h1>
       <ul>
         <li>
           <Link href="/about">About</Link>
@@ -13,8 +14,10 @@ const HomePage = () => {
         <li>
           <Link href="/clients">Clients</Link>
         </li>
+        <li>
+          <Link href="/pre-rendered">getStaticProps Page</Link>
+        </li>
       </ul>
-      <h1>Home Page</h1>
     </div>
   );
 };
