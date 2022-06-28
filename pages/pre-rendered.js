@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import Link from "next/link";
 
 const PreRenderedPage = ({ products }) => {
   return (
@@ -11,7 +12,9 @@ const PreRenderedPage = ({ products }) => {
       </p>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>{product.name}</li>
+          <li key={product.id}>
+            <Link href={`/${product.id}`}>{product.name}</Link>
+          </li>
         ))}
       </ul>
     </div>
