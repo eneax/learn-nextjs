@@ -24,6 +24,22 @@ export const getStaticProps = async () => {
   const productsJsonData = await fs.readFile(productsFilePath);
   const data = JSON.parse(productsJsonData);
 
+  // Redirect user to `/no-data` page if no data is found
+  if (!data) {
+    return {
+      redirect: {
+        destination: "/no-data",
+      },
+    };
+  }
+
+  // Return 404 page if no products are found
+  if (data.products.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       products: data.products,
