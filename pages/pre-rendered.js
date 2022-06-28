@@ -7,7 +7,7 @@ const PreRenderedPage = ({ products }) => {
       <h1>getStaticProps</h1>
       <p>
         (SSG) - this page is automatically generated as static HTML + JSON
-        (using getStaticProps)
+        (using getStaticProps) and uses revalidate (ISR: 10 Seconds)
       </p>
       <ul>
         {products.map((product) => (
@@ -19,6 +19,7 @@ const PreRenderedPage = ({ products }) => {
 };
 
 export const getStaticProps = async () => {
+  console.log("(Re-)Generating page...");
   const productsFilePath = path.join(process.cwd(), "data", "products.json");
   const productsJsonData = await fs.readFile(productsFilePath);
   const data = JSON.parse(productsJsonData);
@@ -27,6 +28,7 @@ export const getStaticProps = async () => {
     props: {
       products: data.products,
     },
+    revalidate: 10,
   };
 };
 
