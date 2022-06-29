@@ -3,8 +3,8 @@ import useSWR from "swr";
 
 const FIREBASE_API = "url/sale.json";
 
-const LatestSales = () => {
-  const [sales, setSales] = React.useState();
+const LatestSales = (props) => {
+  const [sales, setSales] = React.useState(props.sales);
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(FIREBASE_API, fetcher);
@@ -29,7 +29,7 @@ const LatestSales = () => {
     return <p>Failed to load data!</p>;
   }
 
-  if (!data || !sales) {
+  if (!data && !sales) {
     return <p>Loading...</p>;
   }
 
@@ -45,3 +45,24 @@ const LatestSales = () => {
 };
 
 export default LatestSales;
+
+export const getStaticProps = async () => {
+  const response = await fetch(FIREBASE_API);
+  const data = await response.json();
+  const transformedSales = [];
+
+  for (const key in data) {
+    transformedSales.push({
+      id: key,
+      username: data[key].username,
+      volume: data[key].volume,
+    });
+  }
+
+  return {
+    props: {
+      sales: transformedSales,
+      revalidate: 10,
+    },
+  };
+};
