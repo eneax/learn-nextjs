@@ -20,6 +20,9 @@ const HomePage = () => {
         <li>
           <Link href="/user-profile">getServerSideProps</Link>
         </li>
+        <li>
+          <Link href="/sales/latest-sales">Client-Side Data Fetching</Link>
+        </li>
       </ul>
     </div>
   );
