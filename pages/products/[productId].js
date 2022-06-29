@@ -16,6 +16,8 @@ const ProductDetailsPage = ({ product }) => {
   );
 };
 
+export default ProductDetailsPage;
+
 const getData = async () => {
   const productsFilePath = path.join(process.cwd(), "data", "products.json");
   const productsJsonData = await fs.readFile(productsFilePath);
@@ -42,6 +44,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
+// Let Next.js know which instance of this page should be pre-generated.
 export const getStaticPaths = async () => {
   const data = await getData();
 
@@ -53,5 +56,3 @@ export const getStaticPaths = async () => {
     fallback: true, // remaining product pages are generated just in time
   };
 };
-
-export default ProductDetailsPage;

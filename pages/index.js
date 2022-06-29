@@ -15,7 +15,10 @@ const HomePage = () => {
           <Link href="/clients">Clients</Link>
         </li>
         <li>
-          <Link href="/pre-rendered">getStaticProps Page</Link>
+          <Link href="/pre-rendered">getStaticProps</Link>
+        </li>
+        <li>
+          <Link href="/user-profile">getServerSideProps</Link>
         </li>
       </ul>
     </div>

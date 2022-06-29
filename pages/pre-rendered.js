@@ -13,13 +13,15 @@ const PreRenderedPage = ({ products }) => {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <Link href={`/${product.id}`}>{product.name}</Link>
+            <Link href={`/products/${product.id}`}>{product.name}</Link>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default PreRenderedPage;
 
 export const getStaticProps = async () => {
   console.log("(Re-)Generating page...");
@@ -50,5 +52,3 @@ export const getStaticProps = async () => {
     revalidate: 10,
   };
 };
-
-export default PreRenderedPage;
