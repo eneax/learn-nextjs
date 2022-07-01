@@ -23,6 +23,9 @@ const HomePage = () => {
         <li>
           <Link href="/sales/latest-sales">Client-Side Data Fetching</Link>
         </li>
+        <li>
+          <Link href="/api-route">API Route</Link>
+        </li>
       </ul>
     </div>
   );
