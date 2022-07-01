@@ -3,12 +3,12 @@ import path from "path";
 
 const handler = (req, res) => {
   if (req.method === "POST") {
-    const { email, text } = req.body;
+    const { email, feedback } = req.body;
 
     const newFeedback = {
       id: new Date().toISOString(),
       email,
-      text,
+      feedback,
     };
 
     // get the feedback file path

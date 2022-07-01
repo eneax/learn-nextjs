@@ -11,10 +11,17 @@ const APIRoute = () => {
 
     // send email and feedback to server
     // {email: test@test.com, feedback: "this is a feedback"}
-
-    // clear form
-    email = "";
-    feedback = "";
+    fetch("/api/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, feedback }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
