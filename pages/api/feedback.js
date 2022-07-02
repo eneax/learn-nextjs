@@ -27,8 +27,11 @@ const handler = (req, res) => {
       feedback: newFeedback,
     });
   } else {
+    const filePath = path.join(process.cwd(), "data", "feedback.json");
+    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+
     res.status(200).json({
-      message: "It works!",
+      feedback: data,
     });
   }
 };
