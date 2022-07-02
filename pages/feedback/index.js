@@ -1,17 +1,37 @@
-import { buildFeedbackPath, extractFeedback } from "../api/feedback";
+import * as React from "react";
+
+import { buildFeedbackPath, extractFeedback } from "../api/feedback/index";
 
 const Feedback = ({ feedbackItems }) => {
+  const [feedbackData, setFeedbackData] = React.useState();
+
+  const handleLoadFeedback = (feedbackId) =>
+    fetch(`/api/feedback/${feedbackId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFeedbackData(data.feedback);
+      });
+
   return (
     <div className="feedback">
       <h2>Feedback</h2>
 
       <div>
-        {feedbackItems.map(({ id, email, feedback }) => (
-          <div key={id} style={{ border: "1px solid #000", marginTop: "2rem" }}>
-            <p>Email: {email}</p>
-            <p>Feedback: {feedback}</p>
-          </div>
-        ))}
+        <ul>
+          {feedbackItems.map(({ id, email }) => (
+            <li key={id}>
+              <p>Email: {email}</p>
+
+              <button onClick={() => handleLoadFeedback(id)}>
+                Show Feedback
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {feedbackData && (
+          <p style={{ border: "1px solid #000" }}>{feedbackData.feedback}</p>
+        )}
       </div>
     </div>
   );
