@@ -5,7 +5,6 @@ export default async function HomePage() {
   const renderedSnippets = snippets.map((snippet) => (
     <div key={snippet.id}>
       <h3>{snippet.title}</h3>
-      <pre>{snippet.code}</pre>
     </div>
   ));
 
