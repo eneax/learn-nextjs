@@ -18,5 +18,19 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
     return notFound();
   }
 
-  return <div>{snippet.title}</div>;
+  return (
+    <div>
+      <div className="flex justify-between items-center m-4">
+        <h1 className="text-lg font-bold">{snippet.title}</h1>
+        <div className="flex gap-4">
+          <button className="border rounded p-2">Edit</button>
+          <button className="border rounded p-2">Delete</button>
+        </div>
+      </div>
+
+      <pre className="m-4 p-3 border rounded bg-gray-200 border-gray-200">
+        <code>{snippet.code}</code>
+      </pre>
+    </div>
+  );
 }
