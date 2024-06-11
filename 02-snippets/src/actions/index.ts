@@ -20,10 +20,25 @@ export async function deleteSnippet(id: number) {
   redirect("/");
 }
 
-export async function createSnippet(formData: FormData) {
+export async function createSnippet(
+  formState: { message: string },
+  formData: FormData
+) {
   // Check user input and make sure it's valid
-  const title = formData.get("title") as string;
-  const code = formData.get("code") as string;
+  const title = formData.get("title");
+  const code = formData.get("code");
+
+  if (typeof title !== "string" || title.length < 3) {
+    return {
+      message: "Title must be at least 3 characters",
+    };
+  }
+
+  if (typeof code !== "string" || code.length < 10) {
+    return {
+      message: "Code must be at least 10 characters",
+    };
+  }
 
   // Create a new record in the database
   await db.snippet.create({
