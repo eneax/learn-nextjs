@@ -24,29 +24,41 @@ export async function createSnippet(
   formState: { message: string },
   formData: FormData
 ) {
-  // Check user input and make sure it's valid
-  const title = formData.get("title");
-  const code = formData.get("code");
+  try {
+    // Check user input and make sure it's valid
+    const title = formData.get("title");
+    const code = formData.get("code");
 
-  if (typeof title !== "string" || title.length < 3) {
-    return {
-      message: "Title must be at least 3 characters",
-    };
+    if (typeof title !== "string" || title.length < 3) {
+      return {
+        message: "Title must be at least 3 characters",
+      };
+    }
+
+    if (typeof code !== "string" || code.length < 10) {
+      return {
+        message: "Code must be at least 10 characters",
+      };
+    }
+
+    // Create a new record in the database
+    await db.snippet.create({
+      data: {
+        title,
+        code,
+      },
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return {
+        message: error.message,
+      };
+    } else {
+      return {
+        message: "Something went wrong. Please try again.",
+      };
+    }
   }
-
-  if (typeof code !== "string" || code.length < 10) {
-    return {
-      message: "Code must be at least 10 characters",
-    };
-  }
-
-  // Create a new record in the database
-  await db.snippet.create({
-    data: {
-      title,
-      code,
-    },
-  });
 
   // Redirect home
   redirect("/");
