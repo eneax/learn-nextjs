@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { auth } from "@/auth";
 
 const createTopicSchema = z.object({
   name: z
@@ -16,6 +17,7 @@ interface CreateTopicFormState {
   errors: {
     name?: string[];
     description?: string[];
+    _form?: string[]; // for form-level errors like user not authenticated
   };
 }
 
@@ -30,6 +32,15 @@ export async function createTopic(
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const session = await auth();
+  if (!session || !session.user) {
+    return {
+      errors: {
+        _form: ["You must be authenticated to create a topic."],
+      },
     };
   }
 
