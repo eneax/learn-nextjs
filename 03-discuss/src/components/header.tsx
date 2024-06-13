@@ -9,6 +9,7 @@ import {
   Avatar,
 } from "@nextui-org/react";
 
+import * as actions from "@/actions";
 import { auth } from "@/auth";
 
 export default async function Header() {
@@ -21,15 +22,19 @@ export default async function Header() {
     authContent = (
       <>
         <NavbarItem>
-          <Button type="submit" color="secondary" variant="bordered">
-            Sign In
-          </Button>
+          <form action={actions.signIn}>
+            <Button type="submit" color="secondary" variant="bordered">
+              Sign In
+            </Button>
+          </form>
         </NavbarItem>
 
         <NavbarItem>
-          <Button type="submit" color="primary" variant="flat">
-            Sign Up
-          </Button>
+          <form action={actions.signIn}>
+            <Button type="submit" color="primary" variant="flat">
+              Sign Up
+            </Button>
+          </form>
         </NavbarItem>
       </>
     );
