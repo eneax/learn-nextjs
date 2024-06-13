@@ -1,3 +1,6 @@
+"use client";
+
+import { useFormState } from "react-dom";
 import {
   Input,
   Button,
@@ -10,6 +13,10 @@ import {
 import * as actions from "@/actions";
 
 export default function TopicCreateForm() {
+  const [formState, action] = useFormState(actions.createTopic, {
+    errors: {},
+  });
+
   return (
     <Popover placement="left">
       <PopoverTrigger>
@@ -17,7 +24,7 @@ export default function TopicCreateForm() {
       </PopoverTrigger>
 
       <PopoverContent>
-        <form action={actions.createTopic}>
+        <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
             <h3 className="text-lg">Create a Topic</h3>
             <Input
